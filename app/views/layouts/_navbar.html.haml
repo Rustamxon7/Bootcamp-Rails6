@@ -22,12 +22,20 @@
               %a.dropdown-item{:href => "#"} Something else here
         %li.nav-item
           %a.nav-link.disabled Disabled
-        %li.nav-item
-          Test navigation
+        - if current_user
+          %li.nav-item
+            = current_user.email
+          %li.nav-item
+            = link_to "Account settings", edit_user_registration_path
+          %li.nav-item
+            = link_to "Logout", destroy_user_session_path, method: :delete
+        - else
+          = link_to "Login", new_user_session_path
+          = link_to "Register", new_user_registration_path
       %form.d-flex
-        %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}>/
+        \/
         %button.btn.btn-outline-success{:type => "submit"} Search
-
-= link_to courses_path, class: 'btn btn-success' do 
+= link_to courses_path, class: 'btn btn-success' do
   .fa.fa-book
   Course
