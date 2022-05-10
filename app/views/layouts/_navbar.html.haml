@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
-    %a.navbar-brand{:href => "#"} Navbar
+    %a.navbar-brand{:href => "#"} Rubygems
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
@@ -10,31 +10,23 @@
         %li.nav-item
           %a.nav-link{:href => "#"} Link
         %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} Dropdown
-          %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %li
-              %a.dropdown-item{:href => "#"} Action
-            %li
-              %a.dropdown-item{:href => "#"} Another action
-            %li
-              %hr.dropdown-divider/
-            %li
-              %a.dropdown-item{:href => "#"} Something else here
-        %li.nav-item
-          %a.nav-link.disabled Disabled
-        - if current_user
-          %li.nav-item
-            = current_user.email
-          %li.nav-item
-            = link_to "Account settings", edit_user_registration_path
-          %li.nav-item
-            = link_to "Logout", destroy_user_session_path, method: :delete
-        - else
-          = link_to "Login", new_user_session_path
-          = link_to "Register", new_user_registration_path
+          - if current_user
+            #navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} #{current_user.email}
+            - if current_user
+              %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                %li
+                  = link_to "Account settings", edit_user_registration_path, class: "dropdown-item"
+                %li
+                  = link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item"
+            - else
+              %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                %li
+                  = link_to "Login", new_user_session_path, class: "dropdown-item"
+                %li
+                  = link_to "Register", new_user_registration_path, method: :delete, class: "dropdown-item"
+
       %form.d-flex
         %input.form-control.me-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}>/
-        \/
         %button.btn.btn-outline-success{:type => "submit"} Search
 = link_to courses_path, class: 'btn btn-success' do
   .fa.fa-book
