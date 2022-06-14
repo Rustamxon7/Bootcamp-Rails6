@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.row {
+  --bs-gutter-x: 0rem !important;
+  gap: 1.5rem;
+}
